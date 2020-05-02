@@ -1,5 +1,7 @@
 package LinkedList.CircularlyLinkedList;
 
+import LinkedList.SinglyLinkedList.SinglyLinkedList;
+
 public class CircularlyLinkedList<E> implements ICircularlyLinkedList<E>{
 
     private Node tail = null;
@@ -79,6 +81,34 @@ public class CircularlyLinkedList<E> implements ICircularlyLinkedList<E>{
         }
         size--;
         return pop;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        if(this.tail != null){
+            CircularlyLinkedList.Node iter = this.tail.getNext();
+            while (true){
+                result.append(iter.getElement().toString());
+                result.append("\n"); //optional
+                if(this.tail == iter){
+                    break;
+                }
+                iter = iter.getNext();
+            }
+        }
+
+        return result.toString();
+    }
+
+    public static void main(String[] args) {
+        CircularlyLinkedList<String> circularlyLinkedList = new CircularlyLinkedList<>();
+        circularlyLinkedList.addFirst("a");
+        circularlyLinkedList.addFirst("b");
+        circularlyLinkedList.addFirst("c");
+        System.out.println(circularlyLinkedList.toString());
+        circularlyLinkedList.rotate();
+        System.out.println(circularlyLinkedList.toString());
     }
 
 }
